@@ -1,7 +1,7 @@
 import { TextField, Button, Box, Typography, Container, Avatar, CircularProgress, Skeleton, Alert } from '@mui/material';
 import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import Link from 'next/link';
-import Login from '@/assessts/component/auth/login';
+import Login from '@/assessts/component/auth/Login';
 
 export default function Page() {
     return(

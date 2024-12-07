@@ -17,6 +17,7 @@ body {
     max-width: 100vw;
 
     @import "./global/header.scss";
+    @import './book/reader.scss';
 
     section {
         margin-top: 50px;
@@ -34,24 +35,18 @@ body {
 
         @import './global/content_box.scss';
         @import './book/book.scss';
-    }
 
-    .reader_nav {
-        width: 100px;
-        height: 100px;
-        position: fixed;
-        left: 20px;
-        top: 15px;
-        z-index: 9999;
-
-        .back {
-            cursor: pointer;
-            transition: all 1s ease;
+        .publisher_list_book_warper {
+            padding: 5px 10px;
+            border-radius: 5px;
             &:hover {
-                transform: scale(1.1);
+                box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); 
+                transform: translateY(-1px); 
             }
         }
     }
+
+    
 
     footer {
         margin-top: 50px;
@@ -61,3 +56,18 @@ body {
     }
 }
 
+
+.publisherGetChapterList {
+    &:hover {
+        background-color: #FFCCE1;
+    }
+
+    &:not(:hover){
+        img {
+            display: none;
+        }
+    }
+
+    cursor: pointer;
+    padding: 7px 5px;
+}

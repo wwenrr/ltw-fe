@@ -2,6 +2,7 @@ import { headers, cookies } from "next/headers"
 import { redirect } from "next/navigation";
 import Image from 'next/image'
 import '@/assessts/styles/globalStyle.scss'
+import Link from "next/link";
 
 export default async function RootLayout({ children }) {
     const headerlist = headers()
@@ -14,14 +15,23 @@ export default async function RootLayout({ children }) {
     return (
         <>
           <header>
-            <div className="logo">
+            <Link href="/home" className="logo"
+              style={{
+                display: 'flex',
+                justifyContent: 'center',
+                alignContent: 'center',
+                gap: 8
+              }}
+            >
               <Image
                 src={"/img/logo.png"}
                 alt="Logo"
                 width={50} 
                 height={50}
               />
-            </div>
+
+              <h1 style={{marginTop: 7}}>Web Novel</h1>
+            </Link>
 
             <nav>
               <div className="browse">
@@ -55,21 +65,18 @@ export default async function RootLayout({ children }) {
                 </div>
               </div>
 
-              <div className="browse">
+              <Link href="/account" className="browse">
                 <div className="logo">
-                  <Image
-                    src={"/img/compass.png"}
-                    alt="Logo"
-                    width={25} 
-                    height={25} 
+                  <img src="https://cdn-icons-png.flaticon.com/128/18525/18525601.png" alt="" 
+                      width={35}
+                      height={35}
                   />
                 </div>
-                <div className="span">
-                  Browse
-                </div>
-              </div>
+              </Link>
             </nav>
           </header>
+
+
           <section>
             {children}
           </section>

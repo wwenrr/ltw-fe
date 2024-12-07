@@ -17,9 +17,11 @@ export default function BookFromId() {
             const token = Cookies.get('token')
             const res = await getBook(token, book_id)
             const chapter = await getChaperFromBook(token, book_id)
+            let temp = chapter.message
+            temp.sort((a, b) => a.chapter_num - b.chapter_num);
 
-            setChapter(chapter.message)
             setData(res.message[0])
+            setChapter(temp)
         }
 
         const pathSegments = path.split('/');
@@ -135,7 +137,7 @@ export default function BookFromId() {
                     <div className="table_of_content">
                         {chapter.map((item, index) => {
                             return(
-                                <Link href={`${path}/${item.chapter_num}`} key={index}>
+                                <a href={`${path}/${item.chapter_num}`} key={index}>
                                     <div>
                                         <span>{item.chapter_num}</span>
                                     </div>
@@ -148,7 +150,7 @@ export default function BookFromId() {
                                             marginTop: '20px'
                                         }}>Price: <b>{item.price}</b> VNĐ</p>
                                     </div>
-                                </Link>
+                                </a>
                             )
                         })}
                     </div>

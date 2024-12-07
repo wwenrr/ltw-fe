@@ -623,10 +623,10 @@ export default function Page() {
                     style={{
                         marginBottom: '10px',
                     }}
-                ><b>Tên Đăng Nhập: </b> <span>lisajones12</span></div>
+                ><b>Tên Đăng Nhập: </b> <span>{data.username}</span></div>
                 <div style={{
                         marginBottom: '10px',
-                    }}><b>Vai Trò: </b> <span>publisher</span></div>
+                    }}><b>Vai Trò: </b> <span>{data.role}</span></div>
                 <div><b>Số Tiền Còn Lại: </b> <span>{data.credits}</span></div>
 
 

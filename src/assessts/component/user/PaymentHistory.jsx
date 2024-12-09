@@ -1,12 +1,13 @@
 'use client'
 
 import { getHistoryPayment } from "@/assessts/function/fetch"
-import { Button, useScrollTrigger } from "@mui/material"
+import { Button, CircularProgress, useScrollTrigger } from "@mui/material"
 import React, { useEffect, useState } from "react"
 
 export default function PaymentHistory({token}) {
     const [data, setData] = useState(null)
     const [offset, setOffset] = useState(0)
+    const [loading, setLoading] = useState(false)
 
     async function loadData() {
         try {
@@ -37,7 +38,7 @@ export default function PaymentHistory({token}) {
                 <h1 style={{fontSize: '1rem'}}>Thời Gian Giao Dịch</h1>
             </div>
 
-            {data && data.map((item, index) => {
+            {data ? data.map((item, index) => {
                 return (
                     <div style={{
                         width: '100%',
@@ -53,7 +54,16 @@ export default function PaymentHistory({token}) {
                         <span style={{fontSize: '1rem', color: '#31363F'}}>{item.time}</span>
                     </div>
                 )
-            })}
+            }) : 
+                <>
+                    <div style={{
+                        padding: "40px 0",
+                        width: '100%',
+                        display: 'flex',
+                        justifyContent: 'center'
+                    }}> <CircularProgress /> </div>
+                </>
+            }
 
             <div style={{
                 marginTop: 20,
@@ -61,6 +71,7 @@ export default function PaymentHistory({token}) {
                 borderTop: 'solid 1px #BCCCDC'
             }}>
                 <Button onClick={async () => {
+                    setLoading(true)
                     try {
                         const res = await getHistoryPayment(token, offset - 1)
                         setOffset(offset-1)
@@ -68,9 +79,13 @@ export default function PaymentHistory({token}) {
                     } catch(e) {
                         alert(e.message)
                     }
-                }}>Trước</Button>
+                    setLoading(false)
+                }}
+                    disabled={loading}
+                >Trước</Button>
 
                 <Button onClick={async () => {
+                    setLoading(true)
                     try {
                         const res = await getHistoryPayment(token, offset + 1)
                         setOffset(offset+1)
@@ -78,9 +93,11 @@ export default function PaymentHistory({token}) {
                     } catch(e) {
                         alert(e.message)
                     }
-                }}>Sau</Button>
+                    setLoading(false)
+                }} disabled={loading} >Sau</Button>
 
                 <Button color="success" onClick={async () => {
+                    setLoading(true)
                     try {
                         const res = await getHistoryPayment(token, 0)
                         setOffset(0)
@@ -88,6 +105,7 @@ export default function PaymentHistory({token}) {
                     } catch(e) {
                         alert(e.message)
                     }
+                    setLoading(false)
                 }}>Về Trang Đầu</Button>
             </div>
         </>

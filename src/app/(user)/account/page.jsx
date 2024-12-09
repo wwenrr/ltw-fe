@@ -159,4 +159,110 @@ export default function Page() {
                 </div>
             </>
         )
+
+    else {
+        return (
+            <>
+                <div 
+                    style={{
+                        width: '70%',
+                        backgroundColor: '#FAFAFA',
+                        margin: 'auto',
+                        padding: '25px 100px',
+                        boxShadow: '0 4px 8px rgba(0, 0, 0, 0.1)',
+                        borderRadius: '8px',
+                        position: 'relative',
+                        minWidth: '600px'
+                    }}
+                >
+                    <div
+                        style={{
+                            display: 'flex',
+                            alignItems: 'center',
+                            gap: '40px',
+                        }}
+                    >
+                        <img
+                            style={{
+                                border: '2px solid #ADD8E6',
+                                borderRadius: '100%'
+                            }}
+                            className="skeleton"
+                            width={125} height={125}  />
+                    </div>
+
+                    <h1
+                        style={{
+                            fontWeight: 'bold',
+                            marginTop: '45px',
+                            display: 'block',
+                            borderBottom: '1px solid black',
+                            marginBottom: '20px',
+                            paddingBottom: '7px',
+                            display: 'flex',
+                            alignItems: 'center',
+                            gap: 15
+                        }}
+                    >
+                    <img src="https://cdn-icons-png.flaticon.com/128/9195/9195785.png" alt="" 
+                        width={35}
+                        height={35}
+                    />
+                    Thông tin Cá Nhân</h1>
+
+                    <div
+                        style={{
+                            marginBottom: '10px',
+                        }}
+                    ><b>Tên Đăng Nhập: </b> <span className="skeleton">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>  </div>
+
+                    <div style={{
+                            marginBottom: '10px',
+                        }}><b>Vai Trò: </b> <span className="skeleton">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span></div>
+                    <div><b>Số Tiền Còn Lại: </b> <span className="skeleton">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span></div>
+
+
+                    <h1
+                        style={{
+                            fontWeight: 'bold',
+                            marginTop: '45px',
+                            display: 'block',
+                            borderBottom: '1px solid black',
+                            marginBottom: '20px',
+                            paddingBottom: '7px',
+                            display: 'flex',
+                            alignItems: 'center',
+                            gap: 15
+                        }}
+                    >
+                    <img src="https://cdn-icons-png.flaticon.com/128/9196/9196093.png" alt="" 
+                        width={35}
+                        height={35}
+                    />
+                    Hành Động</h1>
+
+
+                    <h1
+                        style={{
+                            fontWeight: 'bold',
+                            marginTop: '45px',
+                            display: 'block',
+                            borderBottom: '1px solid black',
+                            marginBottom: '20px',
+                            paddingBottom: '7px',
+                            display: 'flex',
+                            alignItems: 'center',
+                            gap: 15
+                        }}
+                    >
+
+                    <img src="https://cdn-icons-png.flaticon.com/128/10789/10789376.png" alt="" 
+                        width={35}
+                        height={35}
+                    />
+                    Lịch Sử Giao Dịch</h1>
+                </div>
+            </>
+        )
+    }
 }

@@ -496,12 +496,78 @@ function Publisher({token}) {
     )
 }
 
+function Manager({token}) {
+    const [twoAction, setAct] = useState({
+        ViewBook: false,
+        AddBook: false,
+    })
+    const [loading, setLoading] = useState(false)
+
+    return(
+        <>
+            <div style={{
+                display: 'grid',
+                gridTemplateColumns: '50% 50%',
+                height: '500px',
+                width: '100%',
+            }}>
+                <div style={{
+                    display: 'flex',
+                    flexDirection: 'column'
+                }}>
+                    <Button 
+                        variant="text"
+                        disabled={loading}
+                        onClick={() => setAct({
+                            ViewBook: true,
+                            AddBook: false,
+                        })}
+                        sx={{
+                            maxWidth: '100%',
+                            padding: '10px'
+                        }}
+                    >Xem Danh Sách Truyện Của Tôi</Button>
+
+                    <Button color="success" 
+                        variant="text"
+                        disabled={loading}
+                        sx={{
+                            marginTop: '15px',
+                            maxWidth: '100%',
+                            padding: '10px'
+                        }}
+                    onClick={() => setAct({
+                            ViewBook: false,
+                            AddBook: true,
+                        })}
+                    >Thêm Một Cuốn Sách</Button>
+                </div>
+
+                <div style={{
+                    borderLeft: '1px solid black',
+                    paddingLeft: '15px'
+                }}>
+                    {twoAction.ViewBook && <div className="">test1</div>}
+                    {twoAction.AddBook  && <div className="">test2</div>}
+                </div>
+            </div>
+        </>
+    )
+}
+
 export default function Action({token, role}) {
 
     if(role === 'publisher')
         return(
             <>
                 <Publisher token = {token}/>
+            </>
+        )
+
+    if(role == 'manager')
+        return(
+            <>
+                <Manager token={token}/>
             </>
         )
 }

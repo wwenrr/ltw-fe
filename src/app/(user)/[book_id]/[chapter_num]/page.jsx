@@ -4,6 +4,7 @@ import { usePathname } from "next/navigation"
 import React, { useEffect, useState } from "react"
 import Cookies from "js-cookie"
 import Link from "next/link"
+import { CircularProgress } from "@mui/material"
 
 export default function Page() {
     const [chapter, setChapter] = useState(null)
@@ -11,8 +12,8 @@ export default function Page() {
     const pathSegment = path.split('/')
     const [chapterOnLoad, setOnLoad] = useState([])
     const [index, setIndex] = useState(-1)
-
     const [bottom, setBottom] = useState(false)
+    const [loading, setLoading] = useState(true)
 
     const handleScroll = () => {
         if(window.innerHeight + window.scrollY > document.documentElement.scrollHeight - 200) {
@@ -22,16 +23,21 @@ export default function Page() {
 
     useState(() => {
         async function foo() {
+            setLoading(true)
             const bookId = pathSegment[1]
             const chapterId = pathSegment[2]
 
             const token = Cookies.get('token')
-
-            const res = await getChaperFromBook(token, bookId)
-            const data = res.message
-
-            data.sort((a, b) => a.chapter_num - b.chapter_num)
-            setChapter(data)
+            
+            try {
+                const res = await getChaperFromBook(token, bookId)
+                const data = res.message
+                data.sort((a, b) => a.chapter_num - b.chapter_num)
+                setChapter(data)
+                setLoading(false)
+            } catch(e) {
+                alert(e.message)
+            }
         }
             
         foo()
@@ -52,6 +58,7 @@ export default function Page() {
 
     useEffect(() => {
         async function foo(chapterId) {
+            setLoading(true)
             const bookId = pathSegment[1]
             const token = Cookies.get('token')
 
@@ -60,6 +67,7 @@ export default function Page() {
 
             setOnLoad(prev => [...prev, data[0]])
             setBottom(false)
+            setLoading(false)
         }
 
         if(index != -1) {
@@ -89,7 +97,7 @@ export default function Page() {
         }
     }, [bottom])
 
-    if(chapter)
+    // if(chapter)
         return (
             <>
                 <a className="reader_nav" href={`/${pathSegment[1]}`} title="Quay lại">
@@ -99,7 +107,8 @@ export default function Page() {
                         alt="" className="back"     
                     />
                 </a>
-                {
+
+                { chapterOnLoad &&
                     chapterOnLoad.map((item, index) => {
                         return(
                             <div key={index} style={{
@@ -135,6 +144,15 @@ export default function Page() {
                         )
                     })
                 }
+
+                {loading && <div style={{
+                    width: '100%',
+                    display: 'flex',
+                    justifyContent: 'center',
+                    marginTop: 15
+                }}>
+                    <CircularProgress style={{padding: 15}}/>
+                </div>}
             </>
         )
 }

@@ -1,4 +1,7 @@
-const url = 'https://ltwbe.hcmutssps.id.vn'
+const local = 'http://127.0.0.1:8080'
+const prod = 'https://ltwbe.hcmutssps.id.vn'
+
+const url = prod
 
 export async function login(data) {
     return fetch(`${url}/auth/login`, {
@@ -34,8 +37,10 @@ export async function register(data) {
 }
 
 export async function getBook(token, bookId) {
+    let res
+
     if(bookId) {
-        return fetch(`${url}/api/getBook?book_id=${bookId}`, {
+        res = await fetch(`${url}/api/getBook?book_id=${bookId}`, {
             method: 'GET', 
             headers: {
                 'Content-Type': 'application/json', 
@@ -43,25 +48,32 @@ export async function getBook(token, bookId) {
             },
         })
         .then(response => {   
+            if(!response.ok)
+                throw new Error("Không tìm thấy dữ liệu")
+
+            return response.json();
+        })
+    } else {
+        res = await fetch(`${url}/api/getBook`, {
+            method: 'GET', 
+            headers: {
+                'Content-Type': 'application/json', 
+                Authorization: `Bearer ${token}`, 
+            },
+        })
+        .then(response => {   
+            if(!response.ok)
+                throw new Error("Không tìm thấy dữ liệu")
+
             return response.json();
         })
     }
-
-
-    return fetch(`${url}/api/getBook`, {
-        method: 'GET', 
-        headers: {
-            'Content-Type': 'application/json', 
-            Authorization: `Bearer ${token}`, 
-        },
-    })
-    .then(response => {   
-        return response.json();
-    })
+    
+    return res
 }
 
 export async function getChaperFromBook(token, bookId) {
-    return fetch(`${url}/api/getChaperFromBook?book_id=${bookId}`, {
+    const res = await fetch(`${url}/api/getChaperFromBook?book_id=${bookId}`, {
         method: 'GET', 
         headers: {
             'Content-Type': 'application/json', 
@@ -71,6 +83,11 @@ export async function getChaperFromBook(token, bookId) {
     .then(response => {   
         return response.json();
     })
+
+    if(res.code != 200)
+        throw new Error(res.message)
+    
+    return res
 }
 
 export async function getChaperFromBookWithChapterNum(token, bookId, chapter_num) {
@@ -255,6 +272,40 @@ export async function getHistoryPayment(token, offset) {
 
         return res.json()
     })
+    
+    return res
+}
+
+export async function addComment(token, bookId, content) {
+    const res = await fetch(`${url}/api/comment?book_id=${bookId}&content=${content}`, {
+        method: 'POST', 
+        headers: {
+            Authorization: `Bearer ${token}`, 
+        },
+    })
+    .then(response => {   
+        return response.json();
+    })
+
+    if(res.code != 200)
+        throw new Error(res.message)
+    
+    return res
+}
+
+export async function loadComment(token, bookId, offset) {
+    const res = await fetch(`${url}/api/comment?book_id=${bookId}&offset=${offset}`, {
+        method: 'GET', 
+        headers: {
+            Authorization: `Bearer ${token}`, 
+        },
+    })
+    .then(response => {   
+        return response.json();
+    })
+
+    if(res.code != 200)
+        throw new Error(res.message)
     
     return res
 }

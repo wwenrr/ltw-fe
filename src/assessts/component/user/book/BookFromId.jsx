@@ -44,14 +44,14 @@ export default function BookFromId() {
                     fontSize: '1.5rem'
                 }}
             >
-                <Link
+                <a
                     href = "/home"
                 >
                     <img src="https://cdn-icons-png.flaticon.com/128/1946/1946436.png" alt="home" 
                         width={25}
                         height={25}
                     />
-                </Link>
+                </a>
                 &nbsp;
                 {data &&  `/ ${data.category} / ${data.name}`}
             </p>

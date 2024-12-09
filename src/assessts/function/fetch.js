@@ -190,3 +190,54 @@ export async function publishNewBook(token, formData) {
     
     return res
 }
+
+export async function changeDisplayName(token, name) {
+    const res = await fetch(`${url}/api/changeDisplayName?display_name=${name}`, {
+        method: 'POST', 
+        headers: {
+            Authorization: `Bearer ${token}`, 
+        },
+    })
+    .then(response => {   
+        return response.json();
+    })
+
+    if(res.code != 200)
+        throw new Error(res.message)
+    
+    return res
+}
+
+export async function changeEmail(token, name) {
+    const res = await fetch(`${url}/api/changeEmail?email=${name}`, {
+        method: 'PUT', 
+        headers: {
+            Authorization: `Bearer ${token}`, 
+        },
+    })
+    .then(response => {   
+        return response.json();
+    })
+
+    if(res.code != 200)
+        throw new Error(res.message)
+    
+    return res
+}
+
+export async function deposit(token, name) {
+    const res = await fetch(`${url}/api/deposit?amount=${name}`, {
+        method: 'PUT', 
+        headers: {
+            Authorization: `Bearer ${token}`, 
+        },
+    })
+    .then(response => {   
+        return response.json();
+    })
+
+    if(res.code != 200)
+        throw new Error(res.message)
+    
+    return res
+}

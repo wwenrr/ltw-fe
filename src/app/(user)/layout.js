@@ -15,7 +15,7 @@ export default async function RootLayout({ children }) {
     return (
         <>
           <header>
-            <Link href="/home" className="logo"
+            <a href="/home" className="logo"
               style={{
                 display: 'flex',
                 justifyContent: 'center',
@@ -31,7 +31,7 @@ export default async function RootLayout({ children }) {
               />
 
               <h1 style={{marginTop: 7}}>Web Novel</h1>
-            </Link>
+            </a>
 
             <nav>
               <div className="browse">

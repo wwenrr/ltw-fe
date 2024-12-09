@@ -7,9 +7,7 @@ export default async function Page() {
     const headerlist = headers()
     const cookieStore = await cookies();
     const token = await cookieStore.get("token");
-
     const res = await getBook(token.value)
-
     const data =res.message
 
     return (
@@ -19,7 +17,7 @@ export default async function Page() {
             <div className="content_box">
                 {
                     data.map((item, index) => {
-                        return <Link key={index} 
+                        return <a key={index} 
                                     className="content"
                                     href={`/${item.id}`}
                                     title={item.name}
@@ -59,7 +57,7 @@ export default async function Page() {
                                             />
                                         </div>
                                     </div>
-                                </Link>
+                                </a>
                     })
                 }
             </div> 

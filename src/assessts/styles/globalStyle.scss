@@ -71,3 +71,16 @@ body {
     cursor: pointer;
     padding: 7px 5px;
 }
+
+.canClick {
+    cursor: pointer;
+
+    &:hover {
+        transform: scale(1.07);
+        transition: all 0.3s ease; 
+    }
+
+    &:active {
+        transform: scale(1);
+    }
+}

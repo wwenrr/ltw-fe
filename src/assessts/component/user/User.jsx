@@ -151,7 +151,7 @@ export function Deposit({token, credits, dataLoad}) {
                             setLoading(true)
 
                             try {
-                                const res = deposit(token, money)
+                                const res = await deposit(token, money)
                                 handleClose()
                                 setMoney('0')
                                 await dataLoad()

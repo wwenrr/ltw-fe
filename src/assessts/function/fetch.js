@@ -241,3 +241,20 @@ export async function deposit(token, name) {
     
     return res
 }
+
+export async function getHistoryPayment(token, offset) {
+    const res = await fetch(`${url}/api/getHistoryPayment?offset=${offset}`, {
+        method: 'GET', 
+        headers: {
+            Authorization: `Bearer ${token}`, 
+        },
+    })
+    .then(res => {
+        if(!res.ok)
+            throw new Error("Không tìm thấy dữ liệu")
+
+        return res.json()
+    })
+    
+    return res
+}

@@ -12,7 +12,13 @@ export default async function Page() {
 
     return (
         <>
-            <h1>Truyện Mới Cập Nhật</h1>
+            <h1 style={{
+                display: 'flex',
+                alignItems: 'center',
+                gap: 15
+            }}>
+            <img src="https://cdn-icons-png.flaticon.com/128/18114/18114451.png" width={35} height={35} alt="" />
+            Truyện Mới Cập Nhật</h1>
 
             <div className="content_box">
                 {

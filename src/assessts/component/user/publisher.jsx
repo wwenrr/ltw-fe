@@ -139,9 +139,12 @@ function SingleBook({token, item, loadBooks}) {
                                     )
                                 })}
 
-                                <Button color="error"
+                                <div style={{
+                                    display: 'flex',
+                                    flexDirection: 'column'
+                                }}>
+                                    {!loading && <Button color="error"
                                     style={{
-                                        marginTop: 25,
                                         padding: '20px 5px'
                                     }}
                                     onClick={async () => {
@@ -158,110 +161,110 @@ function SingleBook({token, item, loadBooks}) {
                                             alert("Đã hủy hành động xóa.");
                                         }
                                     }}
-                                >Xóa Sách Này</Button>
+                                    >Xóa Sách Này</Button>}
 
-                                <Button
-                                    style={{
-                                        marginTop: 25,
-                                        padding: '20px 5px'
-                                    }}
-                                    onClick={() => {
-                                        setShowTable(prev => !prev)
-                                    }}
-                                ><img src="https://cdn-icons-png.flaticon.com/128/1828/1828817.png" width={25} height={25} alt="" /></Button>
-
-                                {showTable && 
-                                    <>
-                                    <Box
-                                        component="form"
-                                        sx={{
-                                            display: 'flex',
-                                            flexDirection: 'column',
-                                            gap: 2,
-                                            maxWidth: 400,
-                                            margin: 'auto',
-                                            padding: 2,
+                                    {!loading && <Button
+                                        style={{
+                                            padding: '20px 5px'
                                         }}
-                                    >
-                                        <Input
-                                            disabled={loadForm}
-                                            type="file"
-                                            onChange={handleFileChange}
-                                            fullWidth
-                                            required
-                                            inputProps={{
-                                                accept: '.txt' 
-                                            }}
+                                        onClick={() => {
+                                            setShowTable(prev => !prev)
+                                        }}
+                                    ><img src="https://cdn-icons-png.flaticon.com/128/1828/1828817.png" width={25} height={25} alt="" /></Button>}
+
+                                    {showTable && 
+                                        <>
+                                        <Box
+                                            component="form"
                                             sx={{
-                                                '& .MuiInput-root': {
-                                                    padding: '10px',
-                                                    border: '1px solid #ccc',
-                                                    borderRadius: '4px',
-                                                },
-                                                '& .MuiInputBase-root': {
-                                                    padding: '10px',
-                                                },
+                                                display: 'flex',
+                                                flexDirection: 'column',
+                                                gap: 2,
+                                                maxWidth: 400,
+                                                margin: 'auto',
+                                                padding: 2,
                                             }}
-                                        />
-                                        <TextField
-                                            disabled={loadForm}
-                                            label="Tên Chapter"
-                                            variant="outlined"
-                                            fullWidth
-                                            required
-                                            value={chapterName}
-                                            onChange={handleChapterNameChange}
-                                        />
-                                        <TextField
-                                            disabled={loadForm}
-                                            label="Số Thứ Tự Chapter"
-                                            variant="outlined"
-                                            fullWidth
-                                            required
-                                            type="number"
-                                            value={chapterNumber}
-                                            onChange={handleChapterNumberChange}
-                                        />
+                                        >
+                                            <Input
+                                                disabled={loadForm}
+                                                type="file"
+                                                onChange={handleFileChange}
+                                                fullWidth
+                                                required
+                                                inputProps={{
+                                                    accept: '.txt' 
+                                                }}
+                                                sx={{
+                                                    '& .MuiInput-root': {
+                                                        padding: '10px',
+                                                        border: '1px solid #ccc',
+                                                        borderRadius: '4px',
+                                                    },
+                                                    '& .MuiInputBase-root': {
+                                                        padding: '10px',
+                                                    },
+                                                }}
+                                            />
+                                            <TextField
+                                                disabled={loadForm}
+                                                label="Tên Chapter"
+                                                variant="outlined"
+                                                fullWidth
+                                                required
+                                                value={chapterName}
+                                                onChange={handleChapterNameChange}
+                                            />
+                                            <TextField
+                                                disabled={loadForm}
+                                                label="Số Thứ Tự Chapter"
+                                                variant="outlined"
+                                                fullWidth
+                                                required
+                                                type="number"
+                                                value={chapterNumber}
+                                                onChange={handleChapterNumberChange}
+                                            />
 
-                                        <TextField
-                                            disabled={loadForm}
-                                            label="Giá Của Chapter"
-                                            variant="outlined"
-                                            fullWidth
-                                            required
-                                            type="number"
-                                            value={price}
-                                            onChange={handlePrice}
-                                        />
+                                            <TextField
+                                                disabled={loadForm}
+                                                label="Giá Của Chapter"
+                                                variant="outlined"
+                                                fullWidth
+                                                required
+                                                type="number"
+                                                value={price}
+                                                onChange={handlePrice}
+                                            />
 
-                                        <Button type="submit"
-                                            disabled={loadForm}
-                                            onClick={async (e) => {
-                                                e.preventDefault()
+                                            <Button type="submit"
+                                                disabled={loadForm}
+                                                onClick={async (e) => {
+                                                    e.preventDefault()
 
-                                                const formData = new FormData();
-                                                formData.append('book_id', item.id)
-                                                formData.append('file_url', file);
-                                                formData.append('chapter_name', chapterName);
-                                                formData.append('chapter_num', chapterNumber);
-                                                formData.append('price', price);
+                                                    const formData = new FormData();
+                                                    formData.append('book_id', item.id)
+                                                    formData.append('file_url', file);
+                                                    formData.append('chapter_name', chapterName);
+                                                    formData.append('chapter_num', chapterNumber);
+                                                    formData.append('price', price);
 
-                                                // console.log(item.id)
-                                                
-                                                setLoadForm(true)
-                                                try {
-                                                    const res = await addChapter(token, formData)
-                                                    await loadData()
-                                                } catch(e) {
-                                                    console.log(e)
-                                                    alert(e.message)
-                                                }
-                                                setLoadForm(false)
-                                            }}
-                                        >Thêm Chapter</Button>
-                                    </Box>
-                                    </>
-                                }
+                                                    // console.log(item.id)
+                                                    
+                                                    setLoadForm(true)
+                                                    try {
+                                                        const res = await addChapter(token, formData)
+                                                        await loadData()
+                                                    } catch(e) {
+                                                        console.log(e)
+                                                        alert(e.message)
+                                                    }
+                                                    setLoadForm(false)
+                                                }}
+                                            >Thêm Chapter</Button>
+                                        </Box>
+                                        </>
+                                    }
+                                </div>
                             </div>
                         </div>
                     </>
@@ -320,8 +323,8 @@ function ViewBook({token, setLoading}) {
         setLoading(true)
         const res = await getPublisherBooks(token)
         const data = res.message
-        setData(data)
         setLoading(false)
+        setData(data)
     }
 
     useEffect(() => {
@@ -454,24 +457,24 @@ function Publisher({token}) {
                     flexDirection: 'column'
                 }}>
                     <Button 
-                        variant="contained"
+                        variant="text"
                         disabled={loading}
                         onClick={() => setAct({
                             ViewBook: true,
                             AddBook: false,
                         })}
                         sx={{
-                            maxWidth: '175px',
+                            maxWidth: '100%',
                             padding: '10px'
                         }}
                     >Xem Danh Sách Truyện Của Tôi</Button>
 
                     <Button color="success" 
-                        variant="contained"
+                        variant="text"
                         disabled={loading}
                         sx={{
                             marginTop: '15px',
-                            maxWidth: '175px',
+                            maxWidth: '100%',
                             padding: '10px'
                         }}
                     onClick={() => setAct({

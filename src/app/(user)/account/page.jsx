@@ -8,6 +8,7 @@ import { Button, Dialog, DialogActions, DialogContent, DialogTitle, TextField, B
 import Action from "@/assessts/component/user/publisher";
 import Notification from "@/assessts/component/Notification";
 import { Deposit, DisplayNameAndEmail } from "@/assessts/component/user/User";
+import PaymentHistory from "@/assessts/component/user/PaymentHistory";
 
 
 export default function Page() {
@@ -89,9 +90,17 @@ export default function Page() {
                             display: 'block',
                             borderBottom: '1px solid black',
                             marginBottom: '20px',
-                            paddingBottom: '7px'
+                            paddingBottom: '7px',
+                            display: 'flex',
+                            alignItems: 'center',
+                            gap: 15
                         }}
-                    >Thông tin</h1>
+                    >
+                    <img src="https://cdn-icons-png.flaticon.com/128/9195/9195785.png" alt="" 
+                        width={35}
+                        height={35}
+                    />
+                    Thông tin Cá Nhân</h1>
 
                     <div
                         style={{
@@ -108,15 +117,45 @@ export default function Page() {
                     <h1
                         style={{
                             fontWeight: 'bold',
-                            marginTop: '25px',
+                            marginTop: '45px',
                             display: 'block',
                             borderBottom: '1px solid black',
                             marginBottom: '20px',
-                            paddingBottom: '7px'
+                            paddingBottom: '7px',
+                            display: 'flex',
+                            alignItems: 'center',
+                            gap: 15
                         }}
-                    >Hành động</h1>
+                    >
+                    <img src="https://cdn-icons-png.flaticon.com/128/9196/9196093.png" alt="" 
+                        width={35}
+                        height={35}
+                    />
+                    Hành Động</h1>
 
+                    
                     <Action token={token} role={data.role}/>
+
+                    <h1
+                        style={{
+                            fontWeight: 'bold',
+                            marginTop: '45px',
+                            display: 'block',
+                            borderBottom: '1px solid black',
+                            marginBottom: '20px',
+                            paddingBottom: '7px',
+                            display: 'flex',
+                            alignItems: 'center',
+                            gap: 15
+                        }}
+                    >
+
+                    <img src="https://cdn-icons-png.flaticon.com/128/10789/10789376.png" alt="" 
+                        width={35}
+                        height={35}
+                    />
+                    Lịch Sử Giao Dịch</h1>
+                    <PaymentHistory token={token}/>
                 </div>
             </>
         )

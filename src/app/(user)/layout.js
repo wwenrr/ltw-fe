@@ -34,45 +34,26 @@ export default async function RootLayout({ children }) {
             </a>
 
             <nav>
-              <div className="browse">
-                <div className="logo">
-                  <Image
-                    src={"/img/compass.png"}
-                    alt="Logo"
-                    width={25} 
-                    height={25} 
-                    style={{
-                      filter: 'sepia(100%) saturate(400%) brightness(60%) contrast(70%)',
-                    }}
-                  />
-                </div>
-                <div className="span">
-                  Browse
-                </div>
-              </div>
-
-              <div className="browse">
-                <div className="logo">
-                  <Image
-                    src={"/img/compass.png"}
-                    alt="Logo"
-                    width={25} 
-                    height={25} 
-                  />
-                </div>
-                <div className="span">
-                  Browse
-                </div>
-              </div>
-
-              <Link href="/account" className="browse">
-                <div className="logo">
+              <a href="/account" className="browse">
+                <div>
                   <img src="https://cdn-icons-png.flaticon.com/128/18525/18525601.png" alt="" 
                       width={35}
                       height={35}
+                      title="Thông tin tài khoản"
+                  />
+                  <span>Thông Tin Tài Khoản</span>
+                </div>
+              </a>
+
+              <a href="/login">
+                <div>
+                  <img src="https://cdn-icons-png.flaticon.com/128/992/992680.png" alt="" 
+                      width={35}
+                      height={35}
+                      title="Đăng Xuất"
                   />
                 </div>
-              </Link>
+              </a>
             </nav>
           </header>
 

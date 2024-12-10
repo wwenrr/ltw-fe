@@ -4,11 +4,15 @@ import { redirect } from "next/navigation";
 export const metadata = {
     title: "Web Novel", 
     description: "Đây là trang chủ của ứng dụng.",
-    icons: {
-        icon: "/img/logo.png", 
-        shortcut: "/img/logo.png", 
-        apple: "/img/logo.png", 
-    },
+    icons: [{
+          icon: "/img/logo.png", 
+          shortcut: "/img/logo.png", 
+          apple: "/img/logo.png", 
+        }, {
+          url: "/img/logo.png",
+          href: "/img/logo.png",
+        },
+      ]
 };
 
 export default async function RootLayout({ children }) {

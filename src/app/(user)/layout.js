@@ -34,14 +34,25 @@ export default async function RootLayout({ children }) {
             </a>
 
             <nav>
-              <a href="/account" className="browse">
+              <a href="/follow" >
                 <div>
-                  <img src="https://cdn-icons-png.flaticon.com/128/18525/18525601.png" alt="" 
+                  <img src="https://cdn-icons-png.flaticon.com/128/3893/3893258.png" alt="" 
+                      width={35}
+                      height={35}
+                      title="Truyện Theo Dõi"
+                  />
+                  <span>Theo Dõi</span>
+                </div>
+              </a>
+
+              <a href="/account" >
+                <div>
+                  <img src="https://cdn-icons-png.flaticon.com/128/1077/1077012.png" alt="" 
                       width={35}
                       height={35}
                       title="Thông tin tài khoản"
                   />
-                  <span>Thông Tin Tài Khoản</span>
+                  <span>Tài Khoản</span>
                 </div>
               </a>
 

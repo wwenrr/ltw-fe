@@ -20,11 +20,13 @@ body {
     @import './book/reader.scss';
 
     section {
-        margin-top: 50px;
+        background: url('https://img.freepik.com/free-vector/blurred-winter-background-with-snowflakes_23-2148720133.jpg?ga=GA1.1.849706149.1732453048&semt=ais_hybrid') no-repeat center center/cover;
+        padding-top: 50px;
         @import url('https://fonts.googleapis.com/css2?family=Braah+One&family=Calistoga&family=Danfo&family=Jaro:opsz@6..72&family=Lacquer&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap');
         box-sizing: border-box;
         padding-left: 10vw;
         padding-right: 10vw;
+        padding-bottom: 200px;
         width: 100%;
         font-family: "Roboto", sans-serif;
         height: 100%;

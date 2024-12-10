@@ -1,11 +1,13 @@
 .content_box {
     background-color: #FAFAFA;
-    margin-top: 40px;
-    padding: 20px 50px;
+    border-radius: 7px;
+    margin-top: 20px;
+    padding: 25px 50px;
     display: flex;
     gap: 5vw;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     flex-wrap: wrap;    
+    min-height: 500px;
 
     .content {
         overflow: hidden;

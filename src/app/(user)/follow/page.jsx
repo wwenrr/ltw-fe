@@ -1,4 +1,4 @@
-import { getBook } from "@/assessts/function/fetch";
+import { getBook, getFollowedBook } from "@/assessts/function/fetch";
 import { redirect } from "next/navigation";
 import { headers, cookies } from "next/headers"
 import Image from 'next/image'
@@ -10,7 +10,7 @@ export default async function Page() {
     const token = await cookieStore.get("token");
 
     try {
-        const res = await getBook(token.value, null)
+        const res = await getFollowedBook(token.value, null)
         const data = res.message
 
         return (
@@ -21,10 +21,10 @@ export default async function Page() {
                     gap: 15
                 }}>
                 <img src="https://cdn-icons-png.flaticon.com/128/18114/18114451.png" width={35} height={35} alt="" />
-                Truyện Mới Cập Nhật</h1>
+                Truyện Đang Theo Dõi</h1>
     
                 <div className="content_box">
-                    {
+                    {data ?
                         data.map((item, index) => {
                             return <a key={index} 
                                         className="content"
@@ -67,13 +67,14 @@ export default async function Page() {
                                             </div>
                                         </div>
                                     </a>
-                        })
+                        }) :
+                        <h2 style={{display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 35, width: '100%'}}>Không Có Truyện Nào Đang Theo Dõi <img src="https://cdn-icons-png.flaticon.com/128/10851/10851491.png" width={45} height={45} alt="" /></h2>
                     }
                 </div> 
             </>
         )
     } catch(e) {
         console.log(e.message)
-        redirect('/login')
+        // redirect('/login')
     }
 }

@@ -10,12 +10,20 @@ header {
     height: 100%;
     z-index: 999;
     justify-content: space-between;
+
     nav {
         display: flex;
-        gap: 75px;
+        gap: 35px;
         height: 100%;
-        // width: 100%;
         align-items: center;
+
+        a {
+            @media (max-width: 768px) {
+                span {
+                    display: none;
+                }
+            }
+        }
 
         div {
             height: 50px;

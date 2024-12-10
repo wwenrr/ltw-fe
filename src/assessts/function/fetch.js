@@ -309,3 +309,71 @@ export async function loadComment(token, bookId, offset) {
     
     return res
 }
+
+export async function getFollowedBook(token) {
+    const res = await fetch(`${url}/api/follow`, {
+        method: 'GET', 
+        headers: {
+            Authorization: `Bearer ${token}`, 
+        },
+    })
+    .then(response => {   
+        return response.json();
+    })
+
+    if(res.code != 200)
+        throw new Error(res.message)
+    
+    return res
+}
+
+export async function checkFollowedBook(token, book_id) {
+    const res = await fetch(`${url}/api/follow?book_id=${book_id}`, {
+        method: 'GET', 
+        headers: {
+            Authorization: `Bearer ${token}`, 
+        },
+    })
+    .then(response => {   
+        return response.json();
+    })
+
+    if(res.code != 200)
+        throw new Error(res.message)
+    
+    return res
+}
+
+export async function fetchCancelFollow(token, book_id) {
+    const res = await fetch(`${url}/api/follow?id=${book_id}`, {
+        method: 'DELETE', 
+        headers: {
+            Authorization: `Bearer ${token}`, 
+        },
+    })
+    .then(response => {   
+        return response.json();
+    })
+
+    if(res.code != 200)
+        throw new Error(res.message)
+    
+    return res
+}
+
+export async function fetchFollow(token, book_id) {
+    const res = await fetch(`${url}/api/follow?book_id=${book_id}`, {
+        method: 'POST', 
+        headers: {
+            Authorization: `Bearer ${token}`, 
+        },
+    })
+    .then(response => {   
+        return response.json();
+    })
+
+    if(res.code != 200)
+        throw new Error(res.message)
+    
+    return res
+}

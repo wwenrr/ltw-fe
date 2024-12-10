@@ -36,14 +36,18 @@ export default function Page() {
                 setChapter(data)
                 setLoading(false)
             } catch(e) {
-                alert(e.message)
+                if (typeof window !== "undefined") {
+                    alert(e.message);
+                }
             }
         }
             
         foo()
 
-        window.addEventListener("scroll", handleScroll);
-        return () => window.removeEventListener("scroll", handleScroll);
+        if (typeof window !== 'undefined') {
+            window.addEventListener("scroll", handleScroll);
+            return () => window.removeEventListener("scroll", handleScroll);
+        }
     }, [path])
 
     useEffect(() => {

@@ -4,6 +4,17 @@ import Image from 'next/image'
 import '@/assessts/styles/globalStyle.scss'
 import Link from "next/link";
 
+export const metadata = {
+  title: "Trang chủ", 
+  description: "Đây là trang chủ của ứng dụng.",
+  keywords: ["Next.js", "Trang chủ", "Ứng dụng"],
+  icons: {
+        icon: "/img/logo.png", 
+        shortcut: "/img/logo.png", 
+        apple: "/img/logo.png", 
+    },
+};
+
 export default async function RootLayout({ children }) {
     const headerlist = headers()
     const cookieStore = await cookies();

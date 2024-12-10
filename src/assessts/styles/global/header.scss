@@ -11,19 +11,21 @@ header {
     z-index: 999;
     justify-content: space-between;
 
+    @media (max-width: 768px) {
+        span {
+            display: none;
+        }
+
+        h1 {
+            display: none;
+        }
+    }
+
     nav {
         display: flex;
         gap: 35px;
         height: 100%;
         align-items: center;
-
-        a {
-            @media (max-width: 768px) {
-                span {
-                    display: none;
-                }
-            }
-        }
 
         div {
             height: 50px;

@@ -85,6 +85,9 @@ export default function Page() {
     useEffect(() => {
         if(chapterOnLoad.length) {
             console.log(chapterOnLoad)
+            if (typeof window !== 'undefined') {
+                document.title = `Chapter ${chapterOnLoad[chapterOnLoad.length - 1].chapter_num}: ${chapterOnLoad[chapterOnLoad.length - 1].chapter_name}`
+            }
         }
     }, [chapterOnLoad])
 

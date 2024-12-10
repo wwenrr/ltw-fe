@@ -2,7 +2,6 @@ import { getBook } from "@/assessts/function/fetch";
 import { redirect } from "next/navigation";
 import { headers, cookies } from "next/headers"
 import Image from 'next/image'
-import Link from "next/link";
 
 export default async function Page() {
     const headerlist = await headers()

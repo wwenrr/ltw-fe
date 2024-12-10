@@ -109,6 +109,13 @@ export default function  BookFromId() {
     },[])
 
     useEffect(() => {
+        if (data) {
+            console.log(data)
+            document.title = data.name;
+        }
+    }, [data]);
+
+    useEffect(() => {
         console.log(data);
     }, [data])
 

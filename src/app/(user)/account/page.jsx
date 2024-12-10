@@ -31,14 +31,14 @@ export default function Page() {
             <>
                 <div 
                     style={{
-                        width: '70%',
+                        // width: '70%',
                         backgroundColor: '#FAFAFA',
                         margin: 'auto',
                         padding: '25px 100px',
                         boxShadow: '0 4px 8px rgba(0, 0, 0, 0.1)',
                         borderRadius: '8px',
                         position: 'relative',
-                        minWidth: '600px'
+                        minWidth: '460px'
                     }}
                 >
                     <div

@@ -58,7 +58,8 @@ function LoadComment({data, prevOffset, nextOffset, loading, offset}) {
                     marginTop: 50,
                     backgroundColor: '#F5F5F7',
                     borderRadius: 15,
-                    paddingLeft: 30
+                    paddingLeft: 30,
+                    paddingBottom: 50
                 }}>
                     {data.map((item, index) => {
                         return(

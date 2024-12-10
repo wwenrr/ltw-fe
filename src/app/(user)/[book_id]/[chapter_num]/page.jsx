@@ -126,15 +126,15 @@ export default function Page() {
                                     <pre
                                         style={{
                                             marginTop: 35,
-                                            overflow: 'auto',           
-                                            whiteSpace: 'normal',        
+                                            overflow: 'auto',               
                                             wordWrap: 'break-word',  
                                             fontSize: '1.4rem',
-                                            whiteSpace: 'normal',
                                             fontFamily: 'Roboto, sans-serif',
                                             maxWidth: '100%',
                                             wordBreak: 'break-word',
                                             lineHeight: '1.5',
+                                            maxWidth: '100%',
+                                            whiteSpace: 'pre-wrap',
                                         }}
                                         >
                                         {item.file_url}

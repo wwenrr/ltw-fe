@@ -38,7 +38,7 @@ export default async function() {
                                     return(
                                         <p>
                                             <a  href={`/category/${item.category}`}
-                                                className={`color${rand(1, 5)}`}>{item.category} / {item.nums_of_books} tác phẩm</a>
+                                                className={`color${rand(1, 10)}`}>{item.category} / {item.nums_of_books} tác phẩm</a>
                                         </p>
                                     )
                                 })}     

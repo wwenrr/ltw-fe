@@ -11,6 +11,7 @@ export default async function Page() {
     try {
         const res = await getBook(token.value, null)
         const data = res.message
+        console.log(res)
 
         return (
             <>
@@ -23,7 +24,7 @@ export default async function Page() {
                 Truyện Mới Cập Nhật</h1>
     
                 <div className="content_box">
-                    {
+                    {data ?
                         data.map((item, index) => {
                             return <a key={index} 
                                         className="content"
@@ -67,12 +68,13 @@ export default async function Page() {
                                         </div>
                                     </a>
                         })
+                        : <h2>Bạn Ơi Chưa Có Truyện Gì Để Đọc</h2>
                     }
                 </div> 
             </>
         )
     } catch(e) {
         console.log(e.message)
-        redirect('/login')
+        // redirect('/login')
     }
 }

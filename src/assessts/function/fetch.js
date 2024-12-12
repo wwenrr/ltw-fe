@@ -450,3 +450,37 @@ export async function fetch_changePassword(token, password) {
     
     return res
 }
+
+export async function getCategory(token) {
+    const res = await fetch(`${url}/api/getAllCategory`, {
+        method: 'GET', 
+        headers: {
+            Authorization: `Bearer ${token}`, 
+        },
+    })
+    .then(response => {   
+        return response.json();
+    })
+
+    if(res.code != 200)
+        throw new Error(res.message)
+    
+    return res
+}
+
+export async function getBookWithCategory(token, cate) {
+    const res = await fetch(`${url}/api/getBookWithCategory?category=${cate}`, {
+        method: 'GET', 
+        headers: {
+            Authorization: `Bearer ${token}`, 
+        },
+    })
+    .then(response => {   
+        return response.json();
+    })
+
+    if(res.code != 200)
+        throw new Error(res.message)
+    
+    return res
+}

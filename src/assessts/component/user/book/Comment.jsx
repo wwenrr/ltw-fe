@@ -104,7 +104,7 @@ export default function Comment({token, book_id}) {
             const res = await loadComment(token, book_id, offset)
             setData(res.message)
         } catch(e) {
-            alert(e.message)
+            // alert(e.message)
         }
         setLoading(false)
     }

@@ -20,7 +20,7 @@ export default async function Page() {
                     alignItems: 'center',
                     gap: 15
                 }}>
-                <img src="https://cdn-icons-png.flaticon.com/128/18114/18114451.png" width={35} height={35} alt="" />
+                <img src="https://cdn-icons-png.flaticon.com/128/18416/18416001.png" width={35} height={35} alt="" />
                 Truyện Đang Theo Dõi</h1>
     
                 <div className="content_box">

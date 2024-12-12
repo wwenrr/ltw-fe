@@ -16,7 +16,7 @@ function Following({token, book_id}) {
             const res = await checkFollowedBook(token, book_id);
             setFollow(res.message)
         } catch(e) {
-            alert(e.message)
+            // alert(e.message)
         }
     }
 
@@ -26,7 +26,7 @@ function Following({token, book_id}) {
             await fetchFollow(token, book_id);
             await loadData()
         } catch(e) {
-            alert(e.message)
+            // alert(e.message)
         } 
         setLoading(false)
     }
@@ -37,7 +37,7 @@ function Following({token, book_id}) {
             await fetchCancelFollow(token, book_id);
             await loadData()
         } catch(e) {
-            alert(e.message)
+            // alert(e.message)
         }
         setLoading(false)
     }
@@ -139,7 +139,12 @@ export default function  BookFromId() {
                         />
                     </a>
                     &nbsp;
-                    {data &&  `/ ${data.category} / ${data.name}`}
+                    
+                    {data &&  
+                        <>
+                            /&nbsp;<a style={{color: 'blue'}} href={`/category/${data.category}`}>{data.category}</a>&nbsp; /&nbsp;{data.name}
+                        </>
+                    }
                 </p>
 
                 <div className="book">

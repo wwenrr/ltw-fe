@@ -14,7 +14,11 @@ export default function PaymentHistory({token}) {
             const res = await getHistoryPayment(token, offset);
             setData(res)
         } catch(e) {
-            alert(e.message)
+            if(e.message === 'Không tìm thấy dữ liệu') {
+                setData(e.message)
+            }
+
+            else alert(e.message)
         }
     }
 
@@ -38,7 +42,7 @@ export default function PaymentHistory({token}) {
                 <h1 style={{fontSize: '1rem'}}>Thời Gian Giao Dịch</h1>
             </div>
 
-            {data ? data.map((item, index) => {
+            {data && data != 'Không tìm thấy dữ liệu' ? data.map((item, index) => {
                 return (
                     <div style={{
                         width: '100%',
@@ -54,7 +58,7 @@ export default function PaymentHistory({token}) {
                         <span style={{fontSize: '1rem', color: '#31363F'}}>{item.time}</span>
                     </div>
                 )
-            }) : 
+            }) : data === "Không tìm thấy dữ liệu" ? <h4>Không tìm thấy dữ liệu</h4> :
                 <>
                     <div style={{
                         padding: "40px 0",

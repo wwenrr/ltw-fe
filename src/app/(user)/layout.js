@@ -41,10 +41,21 @@ export default async function RootLayout({ children }) {
                 height={50}
               />
 
-              <h1 style={{marginTop: 7}}>Web Novel</h1>
+              <h1 style={{marginTop: 7, fontSize: '2.5vw'}}>Web Novel</h1>
             </a>
 
             <nav>
+              <a href="/category" >
+                <div>
+                  <img src="https://cdn-icons-png.flaticon.com/128/718/718970.png" alt="" 
+                      width={35}
+                      height={35}
+                      title="Truyện Theo Dõi"
+                  />
+                  <span>Thể Loại</span>
+                </div>
+              </a>
+
               <a href="/follow" >
                 <div>
                   <img src="https://cdn-icons-png.flaticon.com/128/3893/3893258.png" alt="" 
@@ -83,9 +94,11 @@ export default async function RootLayout({ children }) {
           <section>
             {children}
           </section>
-          <footer>
 
-          </footer>
+        <footer>
+            
+        </footer>
+
         </>
     );
 }

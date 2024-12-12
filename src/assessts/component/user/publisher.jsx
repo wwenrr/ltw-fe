@@ -341,9 +341,9 @@ function ViewBook({token, setLoading}) {
             <>  
                 <div
                     style={{
-                        width: '120%',
+                        width: '100%',
                         maxHeight: '500px',
-                        overflowY: 'auto'
+                        overflowY: 'auto',
                     }}
                 >
                     {data.map((item, index) => <SingleBook item={item} key={index} token={token} loadBooks={loadData}/>)}

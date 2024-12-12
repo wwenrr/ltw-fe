@@ -36,9 +36,9 @@ export default async function() {
                             }}>
                                 {data.map((item, index) => {
                                     return(
-                                        <p>
+                                        <p key={index}>
                                             <a  href={`/category/${item.category}`}
-                                                className={`color${rand(1, 10)}`}>{item.category} / {item.nums_of_books} tác phẩm</a>
+                                                className={`color${rand(1, 20)}`}>{item.category} / {item.nums_of_books} tác phẩm</a>
                                         </p>
                                     )
                                 })}     

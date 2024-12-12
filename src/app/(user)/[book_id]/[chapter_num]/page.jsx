@@ -1,17 +1,28 @@
 'use client'
 import { getChaperFromBook, getChaperFromBookWithChapterNum } from "@/assessts/function/fetch"
 import { redirect, usePathname } from "next/navigation"
-import React, { useEffect, useState } from "react"
+import React, { useEffect, useState, useRef } from "react"
 import Cookies from "js-cookie"
 import Link from "next/link"
 import { CircularProgress } from "@mui/material"
 
 function Menu({chapter, mark, bookId}) {
     const [menu, setMenu] = useState(false)
+    const menuRef = useRef(null);
 
     useEffect(() => {
-        console.log(bookId)
-    }, [])
+        const handleClickOutside = (event) => {
+            if (menuRef.current && !menuRef.current.contains(event.target)) {
+                setMenu(p => !p)
+            }
+        };
+
+        document.addEventListener('click', handleClickOutside);
+
+        return () => {
+            document.removeEventListener('click', handleClickOutside);
+        };
+    }, [menu]);
 
     return(
         <>
@@ -38,7 +49,7 @@ function Menu({chapter, mark, bookId}) {
                 padding: '10px 25px',
                 overflow: 'auto',
                 minWidth: '250px'
-            }}>
+            }} ref={menuRef}>
                 <h2>Danh Sách Chương</h2>
 
                 <div

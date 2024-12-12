@@ -1,7 +1,7 @@
 'use client'
 
 // import Action from "@/assessts/component/user/action";
-import { changeDisplayName, getUserInfo } from "@/assessts/function/fetch";
+import { changeAvatar, changeDisplayName, checkImageExists, getUserInfo } from "@/assessts/function/fetch";
 import Cookies from "js-cookie";
 import { useEffect, useState } from "react";
 import { Button, Dialog, DialogActions, DialogContent, DialogTitle, TextField, Box, Input, Snackbar, Alert } from "@mui/material"
@@ -9,6 +9,81 @@ import Action from "@/assessts/component/user/publisher";
 import Notification from "@/assessts/component/Notification";
 import { Deposit, DisplayNameAndEmail } from "@/assessts/component/user/User";
 import PaymentHistory from "@/assessts/component/user/PaymentHistory";
+
+function Avatar({token, dataLoad, avatar}) {
+    const [isDialogOpen, setIsDialogOpen] = useState(false);
+    const [newAvatar, setNewAvatar] = useState('');
+    const [loading, setLoading] = useState(false)
+
+    const handleImageClick = () => {
+        setIsDialogOpen(true);
+    };
+
+    const handleDialogSubmit = async () => {
+        setLoading(true)
+        if (newAvatar) {
+            try {
+                if (!newAvatar || typeof newAvatar !== 'string' || !newAvatar.startsWith('http')) {
+                    throw Error("URL không hợp lệ");
+                }
+
+                await changeAvatar(token, newAvatar)
+                await dataLoad(newAvatar); 
+            } catch(e) {
+                alert(e.message)
+            }
+        }
+        setLoading(false)
+        setIsDialogOpen(false);
+    };
+
+    const handleDialogCancel = () => {
+        setNewAvatar(avatar); 
+        setIsDialogOpen(false);
+    };
+
+    return(
+        <>
+            <Dialog open={isDialogOpen} onClose={handleDialogCancel}>
+                <DialogTitle>Đổi Avatar</DialogTitle>
+                <DialogContent>
+                    <TextField
+                        disabled={loading}
+                        autoFocus
+                        margin="dense"
+                        label="Link ảnh mới"
+                        type="url"
+                        fullWidth
+                        variant="outlined"
+                        value={newAvatar}
+                        onChange={(e) => setNewAvatar(e.target.value)}
+                        onKeyDown={(e) => {
+                            if(e.key === 'Enter') {
+                                handleDialogSubmit()
+                            }
+                        }}
+                    />
+                </DialogContent>
+                <DialogActions>
+                    <Button disabled={loading} onClick={handleDialogCancel} color="secondary">
+                        Hủy
+                    </Button>
+                    <Button disabled={loading} onClick={handleDialogSubmit} color="primary">
+                        Cập nhật
+                    </Button>
+                </DialogActions>
+            </Dialog>
+            <img
+                onClick={handleImageClick}
+                className="canClick"
+                style={{
+                    border: '2px solid #ADD8E6',
+                    borderRadius: '100%'
+                }}
+            src={avatar} width={125} height={125} alt="icon" />
+        </>
+    )
+}
 
 
 export default function Page() {
@@ -48,12 +123,9 @@ export default function Page() {
                             gap: '40px',
                         }}
                     >
-                        <img
-                            style={{
-                                border: '2px solid #ADD8E6',
-                                borderRadius: '100%'
-                            }}
-                        src="https://cdn-icons-png.flaticon.com/128/149/149071.png" width={125} height={125} alt="icon" />
+                        
+                        <Avatar token={token} dataLoad={dataLoad} avatar={data.img_url}/>
+
 
                         <DisplayNameAndEmail 
                             token={token}

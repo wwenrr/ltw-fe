@@ -1,3 +1,6 @@
+@import url('https://fonts.googleapis.com/css2?family=Braah+One&family=Calistoga&family=Danfo&family=Indie+Flower&family=Jaro:opsz@6..72&family=Lacquer&family=Modak&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap');
+
+
 p {
     word-wrap: break-word;
     overflow-wrap: break-word;
@@ -53,6 +56,9 @@ body {
     footer {
         width: 100%;
         height: 100%;
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(400px, 1fr));
+        gap: 30px;
     }
 }
 

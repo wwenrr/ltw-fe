@@ -107,7 +107,89 @@ export default async function RootLayout({ children }) {
           </section>
 
         <footer>
-            
+            <div style={{
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              gap: 20
+            }}>
+              <Image src="/img/logo.png" alt="" width={50} height={50}/>
+              <h3 style={{
+                fontFamily: '"Indie Flower", cursive',
+                fontSize: '2.5rem',
+                fontWeight: '200'
+              }}>WEBNOVEL</h3>
+            </div>
+
+            <div style={{
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              flexDirection: 'column',
+              gap: 20
+            }}>
+              <h3 style={{
+                fontFamily: '"Caveat Brush", cursive',
+                fontStyle: 'italic',
+                textDecoration: 'underline'
+              }}>Contacts:</h3>
+                <div style={{
+                  fontFamily: '"Indie Flower", cursive',
+                  fontSize: '18px',
+                  fontWeight: 'bold'
+                }}>
+                  Email: qscvdefb@gmail.com
+                </div>
+                <div style={{
+                  fontFamily: '"Indie Flower", cursive',
+                  fontSize: '18px',
+                  fontWeight: 'bold'
+                }}>
+                  Phone: 113
+                </div>
+                <div style={{
+                  fontFamily: '"Indie Flower", cursive',
+                  fontSize: '18px',
+                  fontWeight: 'bold'
+                }}>
+                  Address: abcxyz
+                </div>
+              </div>
+
+            <div style={{
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              flexDirection: 'column',
+              gap: 20
+            }}>
+              <h3 style={{
+                fontFamily: '"Caveat Brush", cursive',
+                fontStyle: 'italic',
+                textDecoration: 'underline'
+              }}>RESOURCES:</h3>
+                <div style={{
+                  fontFamily: '"Indie Flower", cursive',
+                  fontSize: '18px',
+                  fontWeight: 'bold'
+                }}>
+                  Be an Author
+                </div>
+                <div style={{
+                  fontFamily: '"Indie Flower", cursive',
+                  fontSize: '18px',
+                  fontWeight: 'bold'
+                }}>
+                  Terms of Service
+                </div>
+                <div style={{
+                  fontFamily: '"Indie Flower", cursive',
+                  fontSize: '18px',
+                  fontWeight: 'bold'
+                }}>
+                  Affiliate
+                </div>
+              </div>
         </footer>
 
         </>

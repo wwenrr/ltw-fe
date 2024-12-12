@@ -484,3 +484,20 @@ export async function getBookWithCategory(token, cate) {
     
     return res
 }
+
+export async function searchBook(token, key) {
+    const res = await fetch(`${url}/api/search?key=${key}`, {
+        method: 'GET', 
+        headers: {
+            Authorization: `Bearer ${token}`, 
+        },
+    })
+    .then(response => {   
+        return response.json();
+    })
+
+    if(res.code != 200)
+        throw new Error(res.message)
+    
+    return res
+}

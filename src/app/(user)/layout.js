@@ -45,6 +45,17 @@ export default async function RootLayout({ children }) {
             </a>
 
             <nav>
+            <a href="/search" >
+                <div>
+                  <img src="https://cdn-icons-png.flaticon.com/128/954/954591.png" alt="" 
+                      width={35}
+                      height={35}
+                      title="Truyện Theo Dõi"
+                  />
+                  <span>Tìm Kiếm</span>
+                </div>
+              </a>
+
               <a href="/category" >
                 <div>
                   <img src="https://cdn-icons-png.flaticon.com/128/718/718970.png" alt="" 

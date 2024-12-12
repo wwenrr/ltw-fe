@@ -3,7 +3,7 @@ import { use } from "react";
 const local = 'http://127.0.0.1:8080'
 const prod = 'https://ltwbe.hcmutssps.id.vn'
 
-const url = prod
+const url = local
 
 export async function login(data) {
     return fetch(`${url}/auth/login`, {
@@ -38,8 +38,9 @@ export async function register(data) {
     })
 }
 
-export async function getBook(token, bookId) {
+export async function getBook(token, bookId, offset) {
     let res
+    offset = offset ?? 0
 
     if(bookId) {
         res = await fetch(`${url}/api/getBook?book_id=${bookId}`, {
@@ -56,7 +57,7 @@ export async function getBook(token, bookId) {
             return response.json();
         })
     } else {
-        res = await fetch(`${url}/api/getBook`, {
+        res = await fetch(`${url}/api/getBook?offset=${offset}`, {
             method: 'GET', 
             headers: {
                 'Content-Type': 'application/json', 

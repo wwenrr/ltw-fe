@@ -30,8 +30,8 @@ export default async function RootLayout({ children }) {
               style={{
                 display: 'flex',
                 justifyContent: 'center',
-                alignContent: 'center',
-                gap: 8
+                alignItems: 'center',
+                gap: 15
               }}
             >
               <Image
@@ -41,7 +41,7 @@ export default async function RootLayout({ children }) {
                 height={50}
               />
 
-              <h1 style={{marginTop: 7, fontSize: '2.5vw'}}>Web Novel</h1>
+              <h1 style={{fontSize: '2.6vw', fontFamily: 'Roboto, sans-serif', fontWeight: 'bold'}}>Web Novel</h1>
             </a>
 
             <nav>

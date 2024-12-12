@@ -18,7 +18,7 @@ export default function PaymentHistory({token}) {
                 setData(e.message)
             }
 
-            else alert(e.message)
+            // else alert(e.message)
         }
     }
 

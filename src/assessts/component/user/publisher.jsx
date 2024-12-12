@@ -594,7 +594,7 @@ function Manager({token}) {
             setOffset(off)
             setData(res)
         } catch(e) {
-            alert(e.message)
+            // alert(e.message)
         }
     }
 

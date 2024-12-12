@@ -61,7 +61,7 @@ function Menu({chapter, mark, bookId}) {
                         const title = `Chapter ${item.chapter_num}: ${item.chapter_name}`
 
                         return(
-                            <Link key={index} href={`/${item.book_id}/${item.chapter_num}`} className="chapterMenu"
+                            <Link  key={index} href={`/${item.book_id}/${item.chapter_num}`}
                                 style={{
                                     paddingTop: 15,
                                     display: 'grid',
@@ -70,7 +70,7 @@ function Menu({chapter, mark, bookId}) {
                                     paddingBottom: 5,
                                     backgroundColor: index === mark ? '#FFE893' : 'transparent'
                                 }}
-                                >
+                                className="chapterMenu">
                                 <h3 style={{
                                     whiteSpace: 'nowrap', 
                                     overflow: 'hidden',  

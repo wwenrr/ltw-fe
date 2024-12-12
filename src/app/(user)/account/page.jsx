@@ -24,6 +24,8 @@ export default function Page() {
 
     useEffect(() => {
         dataLoad()
+
+        document.title = "Tài Khoản"
     }, [])
 
     if(data)

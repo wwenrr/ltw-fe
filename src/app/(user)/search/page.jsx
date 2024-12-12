@@ -2,7 +2,7 @@
 
 import { searchBook } from "@/assessts/function/fetch";
 import { TextField, useScrollTrigger } from "@mui/material"
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import Cookies from "js-cookie";
 import Image from "next/image";
 
@@ -11,6 +11,10 @@ export default function Page() {
     const [searchTerm, setSearchTerm] = useState('');
     const [loading, setLoading] = useState(false)
     const token = Cookies.get('token')
+
+    useEffect(() => {
+        document.title = "Tìm Kiếm"
+    }, [])
 
     const handleKeyDown = async (e) => {
         if (e.key === 'Enter') {

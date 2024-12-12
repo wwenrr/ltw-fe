@@ -1,10 +1,103 @@
 'use client'
 import { getChaperFromBook, getChaperFromBookWithChapterNum } from "@/assessts/function/fetch"
-import { usePathname } from "next/navigation"
+import { redirect, usePathname } from "next/navigation"
 import React, { useEffect, useState } from "react"
 import Cookies from "js-cookie"
 import Link from "next/link"
 import { CircularProgress } from "@mui/material"
+
+function Menu({chapter, mark, bookId}) {
+    const [menu, setMenu] = useState(false)
+
+    useEffect(() => {
+        console.log(bookId)
+    }, [])
+
+    return(
+        <>
+            <div style={{
+                position: 'fixed',
+                top: '110px',
+                right: '40px',
+                zIndex: 9999,
+            }} className="canClick" onClick={() => {setMenu(p => !p)}}>
+                <img src="https://cdn-icons-png.flaticon.com/128/18472/18472616.png" width={75} height={75} alt="" />
+            </div>
+
+            {menu &&
+            <div style={{
+                position: 'fixed',
+                top: '100px',
+                right: '130px',
+                zIndex: 8888,
+                width: '25vw',
+                height: '80vh',
+                backgroundColor: 'white',
+                borderRadius: 5,
+                boxShadow: '0px 4px 6px rgba(0, 0, 0, 0.1)',
+                padding: '10px 25px',
+                overflow: 'auto',
+                minWidth: '250px'
+            }}>
+                <h2>Danh Sách Chương</h2>
+
+                <div
+                    style={{
+                        paddingTop: 35,
+                        display: 'grid',
+                        gridTemplateColumns: '1fr 2fr 1fr',
+                        gap: 15,
+                        borderBottom: '1px solid rgba(0, 0, 0, 0.1)',
+                        paddingBottom: 5
+                    }}
+                >
+                    <h3>Chapter</h3>
+                    <h3>Tên</h3>
+                    <h3>Giá</h3>
+                </div>
+
+                {
+                    chapter.map((item, index) => {
+                        const title = `Chapter ${item.chapter_num}: ${item.chapter_name}`
+
+                        return(
+                            <Link key={index} href={`/${item.book_id}/${item.chapter_num}`} className="chapterMenu"
+                                style={{
+                                    paddingTop: 15,
+                                    display: 'grid',
+                                    gridTemplateColumns: '1fr 2fr 1fr',
+                                    gap: 15,
+                                    paddingBottom: 5,
+                                    backgroundColor: index === mark ? '#FFE893' : 'transparent'
+                                }}
+                                >
+                                <h3 style={{
+                                    whiteSpace: 'nowrap', 
+                                    overflow: 'hidden',  
+                                    textOverflow: 'ellipsis',
+                                    margin: 0            
+                                }}>{item.chapter_num}</h3>
+                                <h3 style={{
+                                    whiteSpace: 'nowrap', 
+                                    overflow: 'hidden',    
+                                    textOverflow: 'ellipsis',
+                                    margin: 0         
+                                }} title={title}>{title}</h3>
+                                <h3 style={{
+                                    whiteSpace: 'nowrap', 
+                                    overflow: 'hidden',    
+                                    textOverflow: 'ellipsis',
+                                    margin: 0             
+                                }}>{item.price}</h3>
+                            </Link>
+                        )
+                    })
+                }
+            </div>
+            }
+        </>
+    )
+}
 
 export default function Page() {
     const [chapter, setChapter] = useState(null)
@@ -66,12 +159,15 @@ export default function Page() {
             const bookId = pathSegment[1]
             const token = Cookies.get('token')
 
-            const res = await getChaperFromBookWithChapterNum(token, bookId, chapterId)
-            const data = res.message
-
-            setOnLoad(prev => [...prev, data[0]])
-            setBottom(false)
-            setLoading(false)
+            try {
+                const res = await getChaperFromBookWithChapterNum(token, bookId, chapterId)
+                const data = res.message
+                setOnLoad(prev => [...prev, data[0]])
+                setBottom(false)
+                setLoading(false)
+            } catch(e) {
+                alert(e.message)
+            }
         }
 
         if(index != -1) {
@@ -98,8 +194,18 @@ export default function Page() {
             }
             else {
                 const chapterNum = chapter[index+1].chapter_num
-                window.history.pushState(null, '', `/${pathSegment[1]}/${chapterNum}`);
-                setIndex(index => index+1)
+
+                if(chapter[index+1].price > 0) {
+                    let result = window.confirm(`Chương Tiếp Yêu Cầu ${chapter[index+1].price} VNĐ để thanh toán, chắc chắn muốn tiếp tục đọc?`);
+
+                    if(result) {
+                        window.history.pushState(null, '', `/${pathSegment[1]}/${chapterNum}`);
+                        setIndex(index => index+1)
+                    }
+                } else {
+                    window.history.pushState(null, '', `/${pathSegment[1]}/${chapterNum}`);
+                    setIndex(index => index+1)
+                }
             }
         }
     }, [bottom])
@@ -115,13 +221,16 @@ export default function Page() {
                     />
                 </a>
 
+                {chapter && <Menu chapter={chapter} mark={index} bookId={pathSegment[1]}/>}
+
                 { chapterOnLoad &&
                     chapterOnLoad.map((item, index) => {
                         return(
                             <div key={index} style={{
                                 paddingBottom: '75px',
                                 borderBottom: '1px solid #B7B7B7',
-                                paddingTop: '25px'
+                                paddingTop: '25px',
+                                minHeight: '800px'
                             }}>
                                 <h1 style={{
                                     fontSize: '2rem'
@@ -156,7 +265,8 @@ export default function Page() {
                     width: '100%',
                     display: 'flex',
                     justifyContent: 'center',
-                    marginTop: 15
+                    marginTop: 15,
+                    minHeight: '800px'
                 }}>
                     <CircularProgress style={{padding: 15}}/>
                 </div>}

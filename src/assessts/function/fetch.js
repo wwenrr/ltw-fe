@@ -3,7 +3,7 @@ import { use } from "react";
 const local = 'http://127.0.0.1:8080'
 const prod = 'https://ltwbe.hcmutssps.id.vn'
 
-const url = local
+const url = prod
 
 export async function login(data) {
     return fetch(`${url}/auth/login`, {
@@ -94,16 +94,21 @@ export async function getChaperFromBook(token, bookId) {
 }
 
 export async function getChaperFromBookWithChapterNum(token, bookId, chapter_num) {
-    return fetch(`${url}/api/getChaperFromBook?book_id=${bookId}&chapter=${chapter_num}`, {
+    const res = await fetch(`${url}/api/getChaperFromBook?book_id=${bookId}&chapter=${chapter_num}`, {
         method: 'GET', 
         headers: {
-            'Content-Type': 'application/json', 
+            'Content-Type': 'application/json',
             Authorization: `Bearer ${token}`, 
         },
     })
     .then(response => {   
         return response.json();
     })
+
+    if(res.code != 200)
+        throw new Error(res.message)
+    
+    return res
 }
 
 export async function getUserInfo(token) {

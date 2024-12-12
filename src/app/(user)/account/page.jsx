@@ -73,7 +73,7 @@ export default function Page() {
                                 fontSize: '2rem',
                                 marginRight: '10px',
                                 color: '#afafaf'
-                            }}>{data.role}</span>
+                            }}>{data.role ?? 'guest'}</span>
                             <img src="https://cdn-icons-png.flaticon.com/128/10307/10307292.png" alt="" 
                                 width={40}
                                 height={40}
@@ -108,7 +108,7 @@ export default function Page() {
 
                     <div style={{
                             marginBottom: '10px',
-                        }}><b>Vai Trò: </b> <span>{data.role}</span></div>
+                        }}><b>Vai Trò: </b> <span>{data.role ?? 'guest'}</span></div>
                     <div><b>Số Tiền Còn Lại: </b> <span>{data.credits}</span></div>
 
 

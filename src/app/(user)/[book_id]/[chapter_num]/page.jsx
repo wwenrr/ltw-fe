@@ -21,7 +21,7 @@ export default function Page() {
         }
     };
 
-    useState(() => {
+    useEffect(() => {
         async function foo() {
             setLoading(true)
             const bookId = pathSegment[1]

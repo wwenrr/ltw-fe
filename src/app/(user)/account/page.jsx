@@ -31,14 +31,12 @@ export default function Page() {
             <>
                 <div 
                     style={{
-                        // width: '70%',
                         backgroundColor: '#FAFAFA',
                         margin: 'auto',
-                        padding: '25px 100px',
+                        padding: '25px 50px',
                         boxShadow: '0 4px 8px rgba(0, 0, 0, 0.1)',
                         borderRadius: '8px',
                         position: 'relative',
-                        minWidth: '460px'
                     }}
                 >
                     <div
@@ -70,7 +68,7 @@ export default function Page() {
                             position: 'absolute',
                             right: '75px',
                             top: '100px'
-                        }}>
+                        }} className="coin">
                             <span style={{
                                 fontSize: '2rem',
                                 marginRight: '10px',

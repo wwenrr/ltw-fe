@@ -23,7 +23,7 @@ export default function Page() {
                         </Avatar>
 
                         <Typography component="h1" variant="h5" sx={{ fontWeight: 'bold', mb: 2, fontSize: '1.25rem' }}>
-                            Đăng nhập
+                            Đăng Nhập
                         </Typography>
  
                         <Login />

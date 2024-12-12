@@ -1,9 +1,10 @@
-import { addChapter, delelteBook, deleteChapter, getChaperFromBook, getUserInfo, publishNewBook } from "@/assessts/function/fetch";
+import { addChapter, delelteBook, deleteChapter, fetch_changePassword, fetch_deleteAccount, getAllUser, getChaperFromBook, getUserInfo, Promote, publishNewBook } from "@/assessts/function/fetch";
 import Cookies from "js-cookie";
 import { useEffect, useState } from "react";
 import { getPublisherBooks } from "@/assessts/function/fetch"
 import { Button, Dialog, DialogActions, DialogContent, DialogTitle, TextField, Box, Input } from "@mui/material"
 import CircularProgress from '@mui/material/CircularProgress';
+import { preconnect } from "react-dom";
 
 function SingleBook({token, item, loadBooks}) {
     const [data, setData] = useState([])
@@ -496,78 +497,227 @@ function Publisher({token}) {
     )
 }
 
-function Manager({token}) {
-    const [twoAction, setAct] = useState({
-        ViewBook: false,
-        AddBook: false,
-    })
+function DisplayAccount({token, username, role, email, display_name, credits, loadData}) {
     const [loading, setLoading] = useState(false)
+
+    async function promote(user_role) {
+        setLoading(true)
+        try {
+            const res = await Promote(token, username, user_role)
+            await loadData(null)
+            alert(res.message)
+        } catch(e) {
+            alert(e.message)
+        }
+        setLoading(false)
+    }
+
+    async function deleteAccount() {
+        setLoading(true)
+        try {
+            const res = await fetch_deleteAccount(token, username)
+            await loadData(null)
+            alert(res.message)
+        } catch(e) {
+            alert(e.message)
+        }
+        setLoading(false)
+    }
+
+    return (
+        <>
+            <div style={{
+                    width: '100%',
+                    display: 'grid',
+                    gridTemplateColumns: '1fr 1fr 2fr 2fr 0.5fr 1fr 1fr',
+                    paddingBottom: 15,
+                    paddingTop: 20
+                }}>
+                    <span title={username} style={{overflow: 'hidden', width: '90%', textOverflow: 'ellipsis', whiteSpace: 'nowrap'}}>{username}</span>
+                    <span title={role ?? 'guest'} style={{overflow: 'hidden', width: '90%', textOverflow: 'ellipsis', whiteSpace: 'nowrap'}}>{role ?? 'guest'}</span>
+                    <span title={email} style={{overflow: 'hidden', width: '90%', textOverflow: 'ellipsis', whiteSpace: 'nowrap'}}>{email}</span>
+                    <span title={display_name} style={{overflow: 'hidden', width: '90%', textOverflow: 'ellipsis', whiteSpace: 'nowrap'}}>{display_name}</span>
+                    <span title={credits} style={{overflow: 'hidden', width: '90%', textOverflow: 'ellipsis', whiteSpace: 'nowrap'}}>{credits}</span>
+                    <div style={{
+                        display: 'flex',
+                        alignItems: 'center',
+                        transform: 'translateY(-5px)',
+                        justifyContent: 'center'
+                    }}>
+                        {role===null && <img title="Thăng chức thành publisher" 
+                            disabled={loading}
+                            className={loading ? "cannotClick" : "canClick" }
+                            src="https://cdn-icons-png.flaticon.com/128/18446/18446244.png" width={30} height={30} alt="" 
+                            onClick={() => promote('publisher')}
+                        />}
+
+                        {role==='publisher' && <img title="Thăng chức thành quản lí" 
+                            disabled={loading}
+                            className={loading ? "cannotClick" : "canClick" }
+                            src="https://cdn-icons-png.flaticon.com/128/5184/5184141.png" width={30} height={30} alt="" 
+                            onClick={() => promote('manager')}    
+                        /> }
+                    </div>
+
+                    {role !== 'manager' && <img src="https://cdn-icons-png.flaticon.com/128/6861/6861362.png" 
+                            alt=""
+                            width={30}
+                            height={30} 
+                            className={loading ? "cannotClick" : "canClick" }
+                            title="Xóa Tài Khoản"
+                            onClick={() => deleteAccount('manager')}
+                    />}
+                </div>
+        </>
+    )
+}
+
+function Manager({token}) {
+    const [loading, setLoading] = useState(false)
+    const [data, setData] = useState(null)
+    const [offset, setOffset] = useState(0)
+
+    async function Page(action) {
+        setLoading(true)
+        if(action === 'prev') {
+            await loadData(offset-1)
+        } else if(action === 'next') {
+            await loadData(offset+1)
+        }
+        setLoading(false)
+    }
+
+    async function loadData(off) {
+        if(!off) off = offset
+        try {
+            const res = await getAllUser(token, off)
+            setOffset(off)
+            setData(res)
+        } catch(e) {
+            alert(e.message)
+        }
+    }
+
+    useEffect(() => {
+        loadData(offset)
+    }, [])
 
     return(
         <>
             <div style={{
-                display: 'grid',
-                gridTemplateColumns: '50% 50%',
-                height: '500px',
+                display: 'flex',
+                gap: 20,
+                alignContent: 'center'
+            }}>
+                <h3>Quản Lí User</h3>
+                
+            </div>
+            <div style={{
                 width: '100%',
+                padding: '20px 25px'
             }}>
                 <div style={{
-                    display: 'flex',
-                    flexDirection: 'column'
+                    width: '100%',
+                    display: 'grid',
+                    gridTemplateColumns: '1fr 1fr 2fr 2fr 0.5fr 1fr 1fr',
+                    borderBottom: '1px solid #BCCCDC',
+                    paddingBottom: 15
                 }}>
-                    <Button 
-                        variant="text"
-                        disabled={loading}
-                        onClick={() => setAct({
-                            ViewBook: true,
-                            AddBook: false,
-                        })}
-                        sx={{
-                            maxWidth: '100%',
-                            padding: '10px'
-                        }}
-                    >Xem Danh Sách Truyện Của Tôi</Button>
-
-                    <Button color="success" 
-                        variant="text"
-                        disabled={loading}
-                        sx={{
-                            marginTop: '15px',
-                            maxWidth: '100%',
-                            padding: '10px'
-                        }}
-                    onClick={() => setAct({
-                            ViewBook: false,
-                            AddBook: true,
-                        })}
-                    >Thêm Một Cuốn Sách</Button>
+                    <h4 style={{paddingRight: 5}}>Tài Khoản</h4>
+                    <h4 style={{paddingRight: 5}}>Vai Trò</h4>
+                    <h4 style={{paddingRight: 5}}>Địa Chỉ Email</h4>
+                    <h4 style={{paddingRight: 5}}>Tên Hiển Thị</h4>
+                    <h4 style={{paddingRight: 5}}>Tiền</h4>
+                    <h4 style={{paddingRight: 5}}>Thăng Chức</h4>
+                    <h4 style={{paddingRight: 5}}>Xóa Tài Khoản</h4>
                 </div>
 
-                <div style={{
-                    borderLeft: '1px solid black',
-                    paddingLeft: '15px'
-                }}>
-                    {twoAction.ViewBook && <div className="">test1</div>}
-                    {twoAction.AddBook  && <div className="">test2</div>}
-                </div>
+                {
+                    data && 
+                    data.map((item, index) => {
+                        return(
+                            <DisplayAccount 
+                                key={index} 
+                                token={token} 
+                                username={item.username} 
+                                role={item.role} 
+                                email={item.email} 
+                                display_name={item.display_name} 
+                                credits={item.credits}
+                                loadData={loadData}
+                                />
+                        )
+                    })
+                }
+            </div>
+
+            <div style={{
+                display: 'flex',
+                alignItems: 'center'
+            }}>
+                {offset !==0 && <Button disabled={loading} onClick={() => {Page('prev')}}>Prev</Button>}
+                <span>Page: &nbsp;</span> <h3> {offset}</h3>
+                <Button disabled={loading} onClick={() => {Page('next')}}>Next</Button>
             </div>
         </>
     )
 }
 
-export default function Action({token, role}) {
+function ChangePassword({token}) {
+    const [click, setClick] = useState(false)
+    const [loading, setLoading] = useState(false)
+    const [value, setValue] = useState("");
 
-    if(role === 'publisher')
-        return(
-            <>
-                <Publisher token = {token}/>
-            </>
-        )
+    const handleKeyDown = async (event) => {
+        if (event.key === "Enter") {
+            setLoading(true)
+            
+            try {
+                const res = await fetch_changePassword(token, value)
+                setValue('')
+                event.target.value = ('')
+                alert(res.message)
+            } catch(e) {
+                alert(e.message)
+            }
 
-    if(role == 'manager')
-        return(
+            setLoading(false)
+        }
+    };
+
+    return(
+        <>
+            <div style={{
+                display:'flex',
+                alignItems: 'center'
+            }} >
+                <Button style={{
+                    marginBottom: 25
+                }} color="error" onClick={() => {setClick(prev => !prev)}}>Đổi Mật Khẩu</Button>
+
+                {click && <TextField 
+                    disabled={loading} 
+                    label="Mật Khẩu Mới"
+                    onChange={(e) => setValue(e.target.value)}
+                    onKeyDown={handleKeyDown}
+                    style={{
+                        marginLeft: 25
+                    }}
+                >
+                    Mật Khẩu Mới
+                </TextField>}
+            </div>
+            
+        </>
+    )
+}
+
+export default function Action({token, role}) {    
+        return (
             <>
-                <Manager token={token}/>
+                <ChangePassword token={token}/>
+                {role === 'publisher' && <Publisher token = {token}/>}
+                {role === 'manager'   && <Manager token={token}/>}
             </>
         )
 }

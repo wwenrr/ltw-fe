@@ -1,3 +1,5 @@
+import { use } from "react";
+
 const local = 'http://127.0.0.1:8080'
 const prod = 'https://ltwbe.hcmutssps.id.vn'
 
@@ -367,6 +369,77 @@ export async function fetchFollow(token, book_id) {
         headers: {
             Authorization: `Bearer ${token}`, 
         },
+    })
+    .then(response => {   
+        return response.json();
+    })
+
+    if(res.code != 200)
+        throw new Error(res.message)
+    
+    return res
+}
+
+export async function getAllUser(token, offset) {
+    const res = await fetch(`${url}/api/manager/getAllUser?offset=${offset}`, {
+        method: 'GET', 
+        headers: {
+            Authorization: `Bearer ${token}`, 
+        },
+    })
+    .then(res => {
+        if(!res.ok)
+            throw new Error("Không tìm thấy dữ liệu")
+
+        return res.json()
+    })
+
+    return res
+}
+
+export async function Promote(token, username,role) {
+    const res = await fetch(`${url}/api/manager/assignRole?username=${username}&role=${role}`, {
+        method: 'PUT', 
+        headers: {
+            Authorization: `Bearer ${token}`, 
+        },
+    })
+    .then(response => {   
+        return response.json();
+    })
+
+    if(res.code != 200)
+        throw new Error(res.message)
+    
+    return res
+}
+
+export async function fetch_deleteAccount(token, username) {
+    const res = await fetch(`${url}/api/manager/deleteUser?username=${username}`, {
+        method: 'DELETE', 
+        headers: {
+            Authorization: `Bearer ${token}`, 
+        },
+    })
+    .then(response => {   
+        return response.json();
+    })
+
+    if(res.code != 200)
+        throw new Error(res.message)
+    
+    return res
+}
+
+export async function fetch_changePassword(token, password) {
+    const res = await fetch(`${url}/api/changePassword`, {
+        method: 'PUT', 
+        headers: {
+            Authorization: `Bearer ${token}`, 
+        },
+        body: JSON.stringify({
+            password: password, 
+        })
     })
     .then(response => {   
         return response.json();

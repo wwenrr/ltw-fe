@@ -186,7 +186,7 @@ export function Deposit({token, credits, dataLoad}) {
                 </DialogActions>
             </Dialog>
             <div 
-                className="canClick"
+                className="coin canClick"
                 style={{
                     display: 'flex',
                     alignItems: 'center',

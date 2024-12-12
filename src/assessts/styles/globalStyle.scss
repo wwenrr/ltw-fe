@@ -87,6 +87,13 @@ body {
     }
 }
 
+.cannotClick {
+    cursor: not-allowed; 
+    filter: grayscale(100%);
+    pointer-events: none; 
+    opacity: 0.5; 
+}
+
 .skeleton {
     background: linear-gradient(
         90deg,
@@ -105,5 +112,12 @@ body {
     }
     100% {
         background-position: -200% 0;
+    }
+}
+
+
+@media (max-width: 850px) {
+    .coin {
+        display: none !important;
     }
 }

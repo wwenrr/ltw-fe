@@ -23,6 +23,10 @@ export default function Page() {
     }
 
     useEffect(() => {
+        document.title = `Thể Loại: ${cate}`
+    }, [cate])
+
+    useEffect(() => {
         loadData()
     }, [])
 

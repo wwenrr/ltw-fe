@@ -135,6 +135,14 @@ export default function Page({ params }) {
         loadData(off)
     }, [])
 
+    useEffect(() => {
+        if(off > 0)
+            document.title = `Trang ${off}`
+        else {
+            document.title = `Trang Chủ`
+        }
+    }, [off])
+
     return (
         <>
             <h1 style={{

@@ -15,7 +15,7 @@ export default function Login() {
     const [success, setSuccess] = useState('')
 
     useEffect(() => {
-        console.log(data);
+        // console.log(data);
     }, [data])
 
     return(
